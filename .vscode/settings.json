@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "iostream": "cpp",
+        "vector": "cpp",
+        "deque": "cpp",
+        "functional": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp"
+    }
+}
