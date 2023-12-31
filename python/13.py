@@ -38,6 +38,10 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
 
 class Solution:
+    """
+    Sum up each Roman numeral, and then, check if there's any smaller Roman numeral prefix. 
+    If yes, minus it from the sum twice to make up to previous addition.
+    """
     def romanToInt(self, s: str) -> int:
         value_table = {
             "I":             1,
@@ -51,11 +55,12 @@ class Solution:
         sum = 0
         for ii in range(len(s)):
             sum += value_table[s[ii]]
-            if ii > 0 and value_table[s[ii-1]] < value_table[s[ii]]:
+            if ii > 0 and value_table[s[ii-1]] < value_table[s[ii]]: 
                 sum -= value_table[s[ii-1]]*2
 
         print(sum)
         return sum
+    
 s = "III"
 s = "LVIII"
 s = "MCMXCIV"
