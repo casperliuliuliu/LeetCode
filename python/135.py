@@ -29,39 +29,40 @@ n == ratings.length
 0 <= ratings[i] <= 2 * 104
 """
 
+class Solution:
+    def candy_ver1(self, ratings: list[int]) -> int: # TLE, happens when the input list is in completely reversed order. 
+        candies = [1 for _ in range(len(ratings))]
+        for ii in range(len(candies)-1):
+            if ratings[ii] > ratings[ii+1] and candies[ii] <= candies[ii+1]:
+                candies[ii] += 1
+                for jj in range(ii):
+                    if ratings[ii-jj-1] > ratings[ii-jj] and candies[ii-jj-1] <= candies[ii-jj]:
+                        candies[ii-jj-1] += 1
+                    else:
+                        break
 
-def candy_ver1(ratings: list[int]) -> int: # TLE, happens when the input list is in completely reversed order. 
-    candies = [1 for _ in range(len(ratings))]
-    for ii in range(len(candies)-1):
-        if ratings[ii] > ratings[ii+1] and candies[ii] <= candies[ii+1]:
-            candies[ii] += 1
-            for jj in range(ii):
-                if ratings[ii-jj-1] > ratings[ii-jj] and candies[ii-jj-1] <= candies[ii-jj]:
-                    candies[ii-jj-1] += 1
-                else:
-                    break
+            elif ratings[ii] < ratings[ii+1]:
+                candies[ii+1] = candies[ii]+1
 
-        elif ratings[ii] < ratings[ii+1]:
-            candies[ii+1] = candies[ii]+1
-
-    print(candies)
-    return sum(candies)
+        print(candies)
+        return sum(candies)
 
 
-def candy(ratings: list[int]) -> int: # PASS
-    candies = [1 for _ in range(len(ratings))]
-    for ii in range(len(candies)-1):
-        if ratings[ii] < ratings[ii+1]:
-            candies[ii+1] = candies[ii]+1
+    def candy(self, ratings: list[int]) -> int: # PASS
+        candies = [1 for _ in range(len(ratings))]
+        for ii in range(len(candies)-1):
+            if ratings[ii] < ratings[ii+1]:
+                candies[ii+1] = candies[ii]+1
 
-    for ii in range(len(candies)-1, 0,-1):
-        if ratings[ii-1] > ratings[ii] and candies[ii-1] <= candies[ii]:
-            candies[ii-1] = candies[ii]+1
-            
-    print(candies)
-    return sum(candies)
+        for ii in range(len(candies)-1, 0,-1):
+            if ratings[ii-1] > ratings[ii] and candies[ii-1] <= candies[ii]:
+                candies[ii-1] = candies[ii]+1
+                
+        print(candies)
+        return sum(candies)
 
 # ratings = [1,2,2]
 # ratings = [1,2,87,87,87,2,1]
 ratings = [1,2,3,3,2,1]
-candy(ratings)
+
+Solution().candy(ratings)
